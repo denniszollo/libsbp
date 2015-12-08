@@ -100,6 +100,7 @@ class Framer(object):
     """
     # preamble - not readall(1) to allow breaking before messages,
     # empty input
+    print "called receive with bytes remaining: {0}".format(self._in_waiting()) 
     preamble = self._read(1)
     if not preamble:
       return None
