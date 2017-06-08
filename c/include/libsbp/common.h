@@ -22,6 +22,15 @@
 #ifndef COMMON_INT_TYPES
 #define COMMON_INT_TYPES
 
+/* Determine Toolchain */
+#if defined __GNUC__
+#define TOOLCHAIN_GCC
+#elif defined _MSC_VER
+#define TOOLCHAIN_MSC
+#else
+#error "libsbp common.h Toolchain undetected"
+#endif
+
 /** \defgroup common_inttypes Integer types
  * Specified-width integer type definitions for shorter and nicer code.
  *
