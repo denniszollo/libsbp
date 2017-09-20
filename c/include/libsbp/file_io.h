@@ -31,6 +31,7 @@
 #define LIBSBP_FILE_IO_MESSAGES_H
 
 #include "common.h"
+TOOLCHAIN_PRAGMA_PACK_HEAD
 
 
 /** Read file from the file system (host => device)
@@ -45,7 +46,7 @@
  * to this message when it is received from sender ID 0x42.
  */
 #define SBP_MSG_FILEIO_READ_REQ      0x00A8
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 sequence;      /**< Read sequence number */
   u32 offset;        /**< File offset [bytes] */
   u8 chunk_size;    /**< Chunk size to read [bytes] */
@@ -62,7 +63,7 @@ typedef struct __attribute__((packed)) {
  * preserved from the request.
  */
 #define SBP_MSG_FILEIO_READ_RESP     0x00A3
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 sequence;    /**< Read sequence number */
   u8 contents[0]; /**< Contents of read file */
 } msg_fileio_read_resp_t;
@@ -82,7 +83,7 @@ typedef struct __attribute__((packed)) {
  * from sender ID 0x42.
  */
 #define SBP_MSG_FILEIO_READ_DIR_REQ  0x00A9
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 sequence;    /**< Read sequence number */
   u32 offset;      /**< The offset to skip the first n elements of the file list
  */
@@ -100,7 +101,7 @@ typedef struct __attribute__((packed)) {
  * the response is preserved from the request.
  */
 #define SBP_MSG_FILEIO_READ_DIR_RESP 0x00AA
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 sequence;    /**< Read sequence number */
   u8 contents[0]; /**< Contents of read directory */
 } msg_fileio_read_dir_resp_t;
@@ -114,7 +115,7 @@ typedef struct __attribute__((packed)) {
  * process this message when it is received from sender ID 0x42.
  */
 #define SBP_MSG_FILEIO_REMOVE        0x00AC
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   char filename[0]; /**< Name of the file to delete */
 } msg_fileio_remove_t;
 
@@ -131,7 +132,7 @@ typedef struct __attribute__((packed)) {
  * 0x42.
  */
 #define SBP_MSG_FILEIO_WRITE_REQ     0x00AD
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 sequence;    /**< Write sequence number */
   u32 offset;      /**< Offset into the file at which to start writing in bytes [bytes] */
   char filename[0]; /**< Name of the file to write to */
@@ -148,11 +149,11 @@ typedef struct __attribute__((packed)) {
  * request.
  */
 #define SBP_MSG_FILEIO_WRITE_RESP    0x00AB
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 sequence;    /**< Write sequence number */
 } msg_fileio_write_resp_t;
 
 
 /** \} */
-
+TOOLCHAIN_PRAGMA_PACK_TAIL
 #endif /* LIBSBP_FILE_IO_MESSAGES_H */

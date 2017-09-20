@@ -24,6 +24,7 @@
 #define LIBSBP_OBSERVATION_MESSAGES_H
 
 #include "common.h"
+TOOLCHAIN_PRAGMA_PACK_HEAD
 #include "gnss.h"
 
 
@@ -31,7 +32,7 @@
  *
 * Header of a GNSS observation message.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   gps_time_nano_t t;        /**< GNSS time of this observation */
   u8 n_obs;    /**< Total number of observations. First nibble is the size
 of the sequence (n), second nibble is the zero-indexed
@@ -47,7 +48,7 @@ counter (ith packet of n)
  * doppler and 8-bits of fractional doppler. This doppler is defined
  * as positive for approaching satellites.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   s16 i;    /**< Doppler whole Hz [Hz] */
   u8 f;    /**< Doppler fractional part [Hz / 256] */
 } doppler_t;
@@ -59,7 +60,7 @@ typedef struct __attribute__((packed)) {
  * tracked. The observations are interoperable with 3rd party
  * receivers and conform with typical RTCMv3 GNSS observations.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 P;        /**< Pseudorange observation [2 cm] */
   carrier_phase_t L;        /**< Carrier phase observation with typical sign convention. [cycles] */
   doppler_t D;        /**< Doppler observation with typical sign convention. [Hz] */
@@ -90,7 +91,7 @@ estimate for the signal is valid.
  * with typical RTCMv3 GNSS observations.
  */
 #define SBP_MSG_OBS                  0x004A
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   observation_header_t header;    /**< Header of a GPS observation message */
   packed_obs_content_t obs[0];    /**< Pseudorange and carrier phase observation for a
 satellite being tracked.
@@ -107,7 +108,7 @@ satellite being tracked.
  * error in the pseudo-absolute position output.
  */
 #define SBP_MSG_BASE_POS_LLH         0x0044
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   double lat;       /**< Latitude [deg] */
   double lon;       /**< Longitude [deg] */
   double height;    /**< Height [m] */
@@ -124,14 +125,14 @@ typedef struct __attribute__((packed)) {
  * pseudo-absolute position output.
  */
 #define SBP_MSG_BASE_POS_ECEF        0x0048
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   double x;    /**< ECEF X coodinate [m] */
   double y;    /**< ECEF Y coordinate [m] */
   double z;    /**< ECEF Z coordinate [m] */
 } msg_base_pos_ecef_t;
 
 
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   gnss_signal16_t sid;             /**< GNSS signal identifier (16 bit) */
   gps_time_sec_t toe;             /**< Time of Ephemerides */
   double ura;             /**< User Range Accuracy [m] */
@@ -145,7 +146,7 @@ GLO: 0 = valid, non-zero = invalid
 } ephemeris_common_content_t;
 
 
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   sbp_gnss_signal_t sid;             /**< GNSS signal identifier */
   sbp_gps_time_t toe;             /**< Time of Ephemerides */
   double ura;             /**< User Range Accuracy [m] */
@@ -168,7 +169,7 @@ GLO: 0 = valid, non-zero = invalid
  * 20-III) for more details.
  */
 #define SBP_MSG_EPHEMERIS_GPS_DEP_E  0x0081
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   ephemeris_common_content_dep_a_t common;      /**< Values common for all ephemeris types */
   double tgd;         /**< Group delay differential between L1 and L2 [s] */
   double c_rs;        /**< Amplitude of the sine harmonic correction term to the orbit radius [m] */
@@ -204,7 +205,7 @@ typedef struct __attribute__((packed)) {
  * 20-III) for more details.
  */
 #define SBP_MSG_EPHEMERIS_GPS        0x0086
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   ephemeris_common_content_t common;      /**< Values common for all ephemeris types */
   double tgd;         /**< Group delay differential between L1 and L2 [s] */
   double c_rs;        /**< Amplitude of the sine harmonic correction term to the orbit radius [m] */
@@ -232,7 +233,7 @@ typedef struct __attribute__((packed)) {
 
 
 #define SBP_MSG_EPHEMERIS_SBAS_DEP_A 0x0082
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   ephemeris_common_content_dep_a_t common;    /**< Values common for all ephemeris types */
   double pos[3];    /**< Position of the GEO at time toe [m] */
   double vel[3];    /**< Velocity of the GEO at time toe [m/s] */
@@ -251,7 +252,7 @@ typedef struct __attribute__((packed)) {
  * for more details.
  */
 #define SBP_MSG_EPHEMERIS_GLO_DEP_A  0x0083
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   ephemeris_common_content_dep_a_t common;    /**< Values common for all ephemeris types */
   double gamma;     /**< Relative deviation of predicted carrier frequency from nominal */
   double tau;       /**< Correction to the SV time [s] */
@@ -262,7 +263,7 @@ typedef struct __attribute__((packed)) {
 
 
 #define SBP_MSG_EPHEMERIS_SBAS       0x0084
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   ephemeris_common_content_t common;    /**< Values common for all ephemeris types */
   double pos[3];    /**< Position of the GEO at time toe [m] */
   double vel[3];    /**< Velocity of the GEO at time toe [m/s] */
@@ -281,7 +282,7 @@ typedef struct __attribute__((packed)) {
  * for more details.
  */
 #define SBP_MSG_EPHEMERIS_GLO_DEP_B  0x0085
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   ephemeris_common_content_t common;    /**< Values common for all ephemeris types */
   double gamma;     /**< Relative deviation of predicted carrier frequency from nominal */
   double tau;       /**< Correction to the SV time [s] */
@@ -300,7 +301,7 @@ typedef struct __attribute__((packed)) {
  * for more details.
  */
 #define SBP_MSG_EPHEMERIS_GLO_DEP_C  0x0087
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   ephemeris_common_content_t common;    /**< Values common for all ephemeris types */
   double gamma;     /**< Relative deviation of predicted carrier frequency from nominal */
   double tau;       /**< Correction to the SV time [s] */
@@ -321,7 +322,7 @@ typedef struct __attribute__((packed)) {
  * for more details.
  */
 #define SBP_MSG_EPHEMERIS_GLO        0x0088
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   ephemeris_common_content_t common;    /**< Values common for all ephemeris types */
   double gamma;     /**< Relative deviation of predicted carrier frequency from nominal */
   double tau;       /**< Correction to the SV time [s] */
@@ -343,7 +344,7 @@ typedef struct __attribute__((packed)) {
  * 20-III) for more details.
  */
 #define SBP_MSG_EPHEMERIS_DEP_D      0x0080
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   double tgd;         /**< Group delay differential between L1 and L2 [s] */
   double c_rs;        /**< Amplitude of the sine harmonic correction term to the orbit radius [m] */
   double c_rc;        /**< Amplitude of the cosine harmonic correction term to the orbit radius [m] */
@@ -381,7 +382,7 @@ typedef struct __attribute__((packed)) {
 * Deprecated.
  */
 #define SBP_MSG_EPHEMERIS_DEP_A      0x001A
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   double tgd;         /**< Group delay differential between L1 and L2 [s] */
   double c_rs;        /**< Amplitude of the sine harmonic correction term to the orbit radius [m] */
   double c_rc;        /**< Amplitude of the cosine harmonic correction term to the orbit radius [m] */
@@ -416,7 +417,7 @@ typedef struct __attribute__((packed)) {
 * Deprecated.
  */
 #define SBP_MSG_EPHEMERIS_DEP_B      0x0046
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   double tgd;         /**< Group delay differential between L1 and L2 [s] */
   double c_rs;        /**< Amplitude of the sine harmonic correction term to the orbit radius [m] */
   double c_rc;        /**< Amplitude of the cosine harmonic correction term to the orbit radius [m] */
@@ -456,7 +457,7 @@ typedef struct __attribute__((packed)) {
  * 20-III) for more details.
  */
 #define SBP_MSG_EPHEMERIS_DEP_C      0x0047
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   double tgd;         /**< Group delay differential between L1 and L2 [s] */
   double c_rs;        /**< Amplitude of the sine harmonic correction term to the orbit radius [m] */
   double c_rc;        /**< Amplitude of the cosine harmonic correction term to the orbit radius [m] */
@@ -493,7 +494,7 @@ typedef struct __attribute__((packed)) {
  *
 * Header of a GPS observation message.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   sbp_gps_time_t t;        /**< GPS time of this observation */
   u8 n_obs;    /**< Total number of observations. First nibble is the size
 of the sequence (n), second nibble is the zero-indexed
@@ -510,7 +511,7 @@ counter (ith packet of n)
  * sign convention than a typical GPS receiver and the phase has
  * the opposite sign as the pseudorange.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   s32 i;    /**< Carrier phase whole cycles [cycles] */
   u8 f;    /**< Carrier phase fractional part [cycles / 256] */
 } carrier_phase_dep_a_t;
@@ -520,7 +521,7 @@ typedef struct __attribute__((packed)) {
  *
 * Deprecated.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 P;       /**< Pseudorange observation [cm] */
   carrier_phase_dep_a_t L;       /**< Carrier phase observation with opposite sign from typical convention */
   u8 cn0;     /**< Carrier-to-Noise density [dB Hz / 4] */
@@ -537,7 +538,7 @@ carrier phase ambiguity may have changed.
  * Pseudorange and carrier phase observation for a satellite being
  * tracked.  Pseudoranges are referenced to a nominal pseudorange.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 P;       /**< Pseudorange observation [cm] */
   carrier_phase_dep_a_t L;       /**< Carrier phase observation with opposite sign from typical convention. */
   u8 cn0;     /**< Carrier-to-Noise density [dB Hz / 4] */
@@ -555,7 +556,7 @@ carrier phase ambiguity may have changed.
  * tracked. The observations are be interoperable with 3rd party
  * receivers and conform with typical RTCMv3 GNSS observations.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 P;       /**< Pseudorange observation [2 cm] */
   carrier_phase_t L;       /**< Carrier phase observation with typical sign convention. [cycles] */
   u8 cn0;     /**< Carrier-to-Noise density [dB Hz / 4] */
@@ -572,7 +573,7 @@ carrier phase ambiguity may have changed.
 * Deprecated.
  */
 #define SBP_MSG_OBS_DEP_A            0x0045
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   observation_header_dep_t header;    /**< Header of a GPS observation message */
   packed_obs_content_dep_a_t obs[0];    /**< Pseudorange and carrier phase observation for a
 satellite being tracked.
@@ -590,7 +591,7 @@ satellite being tracked.
  * observations.
  */
 #define SBP_MSG_OBS_DEP_B            0x0043
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   observation_header_dep_t header;    /**< Header of a GPS observation message */
   packed_obs_content_dep_b_t obs[0];    /**< Pseudorange and carrier phase observation for a
 satellite being tracked.
@@ -609,7 +610,7 @@ satellite being tracked.
  * with typical RTCMv3 GNSS observations.
  */
 #define SBP_MSG_OBS_DEP_C            0x0049
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   observation_header_dep_t header;    /**< Header of a GPS observation message */
   packed_obs_content_dep_c_t obs[0];    /**< Pseudorange and carrier phase observation for a
 satellite being tracked.
@@ -624,7 +625,7 @@ satellite being tracked.
  * Please see ICD-GPS-200 (Chapter 20.3.3.5.1.7) for more details.
  */
 #define SBP_MSG_IONO                 0x0090
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   gps_time_sec_t t_nmct;    /**< Navigation Message Correction Table Valitidy Time */
   double a0;       
   double a1;       
@@ -642,7 +643,7 @@ typedef struct __attribute__((packed)) {
  * Please see ICD-GPS-200 (Chapter 20.3.3.5.1.4) for more details.
  */
 #define SBP_MSG_SV_CONFIGURATION_GPS 0x0091
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   gps_time_sec_t t_nmct;      /**< Navigation Message Correction Table Valitidy Time */
   u32 l2c_mask;    /**< L2C capability mask, SV32 bit being MSB, SV1 bit being LSB */
 } msg_sv_configuration_gps_t;
@@ -653,7 +654,7 @@ typedef struct __attribute__((packed)) {
 * Please see ICD-GPS-200 (30.3.3.3.1.1) for more details.
  */
 #define SBP_MSG_GROUP_DELAY_DEP_A    0x0092
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   sbp_gps_time_t t_op;        /**< Data Predict Time of Week */
   u8 prn;         /**< Satellite number */
   u8 valid;       /**< bit-field indicating validity of the values,
@@ -671,7 +672,7 @@ LSB indicating tgd validity etc.
 * Please see ICD-GPS-200 (30.3.3.3.1.1) for more details.
  */
 #define SBP_MSG_GROUP_DELAY          0x0093
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   gps_time_sec_t t_op;        /**< Data Predict Time of Week */
   sbp_gnss_signal_t sid;         /**< GNSS signal identifier */
   u8 valid;       /**< bit-field indicating validity of the values,
@@ -684,7 +685,7 @@ LSB indicating tgd validity etc.
 } msg_group_delay_t;
 
 
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   sbp_gnss_signal_t sid;             /**< GNSS signal identifier */
   gps_time_sec_t toa;             /**< Reference time of almanac */
   double ura;             /**< User Range Accuracy [m] */
@@ -717,7 +718,7 @@ Satellite health status for GLO:
  * (ICD-GPS-200, Chapter 20.3.3.5.1.2 Almanac Data) for more details.
  */
 #define SBP_MSG_ALMANAC_GPS          0x0070
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   almanac_common_content_t common;      /**< Values common for all almanac types */
   double m0;          /**< Mean anomaly at reference time [rad] */
   double ecc;         /**< Eccentricity of satellite orbit */
@@ -739,7 +740,7 @@ typedef struct __attribute__((packed)) {
  * almanac" for details.
  */
 #define SBP_MSG_ALMANAC_GLO          0x0071
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   almanac_common_content_t common;         /**< Values common for all almanac types */
   double lambda_na;      /**< Longitude of the first ascending node of the orbit in PZ-90.02
 coordinate system
@@ -754,5 +755,5 @@ coordinate system
 
 
 /** \} */
-
+TOOLCHAIN_PRAGMA_PACK_TAIL
 #endif /* LIBSBP_OBSERVATION_MESSAGES_H */

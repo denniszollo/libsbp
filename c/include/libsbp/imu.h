@@ -24,6 +24,7 @@
 #define LIBSBP_IMU_MESSAGES_H
 
 #include "common.h"
+TOOLCHAIN_PRAGMA_PACK_HEAD
 
 
 /** Raw IMU data
@@ -32,7 +33,7 @@
  * gyroscope readings.
  */
 #define SBP_MSG_IMU_RAW 0x0900
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 tow;      /**< Milliseconds since start of GPS week. If the high bit is set, the
 time is unknown or invalid.
  [ms] */
@@ -54,7 +55,7 @@ time is unknown or invalid.
  * depends on the value of `imu_type`.
  */
 #define SBP_MSG_IMU_AUX 0x0901
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u8 imu_type;    /**< IMU type */
   s16 temp;        /**< Raw IMU temperature */
   u8 imu_conf;    /**< IMU configuration */
@@ -62,5 +63,5 @@ typedef struct __attribute__((packed)) {
 
 
 /** \} */
-
+TOOLCHAIN_PRAGMA_PACK_TAIL
 #endif /* LIBSBP_IMU_MESSAGES_H */

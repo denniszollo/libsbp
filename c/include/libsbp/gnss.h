@@ -24,13 +24,14 @@
 #define LIBSBP_GNSS_MESSAGES_H
 
 #include "common.h"
+TOOLCHAIN_PRAGMA_PACK_HEAD
 
 
 /** Represents all the relevant information about the signal
  *
  * Signal identifier containing constellation, band, and satellite identifier
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u8 sat;     /**< Constellation-specific satellite identifier */
   u8 code;    /**< Signal constellation, band and code */
 } gnss_signal16_t;
@@ -40,7 +41,7 @@ typedef struct __attribute__((packed)) {
  *
  * Signal identifier containing constellation, band, and satellite identifier
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u16 sat;         /**< Constellation-specific satellite identifier.
 
 Note: unlike GnssSignal16, GPS satellites are encoded as
@@ -57,7 +58,7 @@ Note: unlike GnssSignal16, GPS satellites are encoded as
  * milliseconds since beginning of the week on the Saturday/Sunday
  * transition.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 tow;    /**< Milliseconds since start of GPS week [ms] */
   u16 wn;     /**< GPS week number [week] */
 } sbp_gps_time_t;
@@ -69,7 +70,7 @@ typedef struct __attribute__((packed)) {
  * seconds since beginning of the week on the Saturday/Sunday
  * transition.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 tow;    /**< Seconds since start of GPS week [s] */
   u16 wn;     /**< GPS week number [week] */
 } gps_time_sec_t;
@@ -82,7 +83,7 @@ typedef struct __attribute__((packed)) {
  * transition. In most cases, observations are epoch aligned
  * so ns field will be 0.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 tow;            /**< Milliseconds since start of GPS week [ms] */
   s32 ns_residual;    /**< Nanosecond residual of millisecond-rounded TOW (ranges
 from -500000 to 500000)
@@ -98,12 +99,12 @@ from -500000 to 500000)
  * cycles and 8-bits of fractional cycles. This phase has the
  * same sign as the pseudorange.
  */
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   s32 i;    /**< Carrier phase whole cycles [cycles] */
   u8 f;    /**< Carrier phase fractional part [cycles / 256] */
 } carrier_phase_t;
 
 
 /** \} */
-
+TOOLCHAIN_PRAGMA_PACK_TAIL
 #endif /* LIBSBP_GNSS_MESSAGES_H */

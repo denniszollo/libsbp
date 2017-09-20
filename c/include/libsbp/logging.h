@@ -24,6 +24,7 @@
 #define LIBSBP_LOGGING_MESSAGES_H
 
 #include "common.h"
+TOOLCHAIN_PRAGMA_PACK_HEAD
 
 
 /** Plaintext logging messages with levels
@@ -33,7 +34,7 @@
  * ERROR, WARNING, DEBUG, INFO logging levels.
  */
 #define SBP_MSG_LOG       0x0401
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u8 level;    /**< Logging level */
   char text[0];  /**< Human-readable string */
 } msg_log_t;
@@ -50,7 +51,7 @@ typedef struct __attribute__((packed)) {
  * Protocol 0 represents SBP and the remaining values are implementation defined.
  */
 #define SBP_MSG_FWD       0x0402
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u8 source;         /**< source identifier */
   u8 protocol;       /**< protocol identifier */
   char fwd_payload[0]; /**< variable length wrapped binary message */
@@ -62,7 +63,7 @@ typedef struct __attribute__((packed)) {
 * All the news fit to tweet.
  */
 #define SBP_MSG_TWEET     0x0012
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   char tweet[140]; /**< Human-readable string */
 } msg_tweet_t;
 
@@ -72,11 +73,11 @@ typedef struct __attribute__((packed)) {
 * Deprecated.
  */
 #define SBP_MSG_PRINT_DEP 0x0010
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   char text[0]; /**< Human-readable string */
 } msg_print_dep_t;
 
 
 /** \} */
-
+TOOLCHAIN_PRAGMA_PACK_TAIL
 #endif /* LIBSBP_LOGGING_MESSAGES_H */
