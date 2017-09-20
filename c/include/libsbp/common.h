@@ -24,9 +24,13 @@
 
 /* Determine Toolchain */
 #if defined __GNUC__
-#define TOOLCHAIN_GCC
+#define TOOLCHAIN_ATTR_PACKED __attribute__((packed))
+#define TOOLCHAIN_PRAGMA_PACK_HEAD 
+#define TOOLCHAIN_PRAGMA_PACK_TAIL
 #elif defined _MSC_VER
-#define TOOLCHAIN_MSC
+#define TOOLCHAIN_ATTR_PACKED /* Intentionally Empty */ 
+#define TOOLCHAIN_PRAGMA_PACK_HEAD #pragma pack(1) 
+#define TOOLCHAIN_PRAGMA_PACK_TAIL #pragma pack()
 #else
 #error "libsbp common.h Toolchain undetected"
 #endif
