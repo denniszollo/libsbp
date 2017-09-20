@@ -24,6 +24,7 @@
 #define LIBSBP_NDB_MESSAGES_H
 
 #include "common.h"
+TOOLCHAIN_PRAGMA_PACK_HEAD
 #include "gnss.h"
 
 
@@ -33,7 +34,7 @@
  * message could also be sent out when fetching an object from NDB.
  */
 #define SBP_MSG_NDB_EVENT 0x0400
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u64 recv_time;          /**< HW time in milliseconds. [ms] */
   u8 event;              /**< Event type. */
   u8 object_type;        /**< Event object type. */
@@ -57,5 +58,5 @@ of other data_source.
 
 
 /** \} */
-
+TOOLCHAIN_PRAGMA_PACK_TAIL
 #endif /* LIBSBP_NDB_MESSAGES_H */

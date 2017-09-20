@@ -24,6 +24,7 @@
 #define LIBSBP_SYSTEM_MESSAGES_H
 
 #include "common.h"
+TOOLCHAIN_PRAGMA_PACK_HEAD
 
 
 /** System start-up message
@@ -34,7 +35,7 @@
  * or configuration requests.
  */
 #define SBP_MSG_STARTUP      0xFF00
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u8 cause;           /**< Cause of startup */
   u8 startup_type;    /**< Startup type */
   u16 reserved;        /**< Reserved */
@@ -48,7 +49,7 @@ typedef struct __attribute__((packed)) {
  * corrections packet.
  */
 #define SBP_MSG_DGNSS_STATUS 0xFF02
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u8 flags;          /**< Status flags */
   u16 latency;        /**< Latency of observation receipt [deci-seconds] */
   u8 num_signals;    /**< Number of signals from base station */
@@ -70,11 +71,11 @@ typedef struct __attribute__((packed)) {
  * the remaining error flags should be inspected.
  */
 #define SBP_MSG_HEARTBEAT    0xFFFF
-typedef struct __attribute__((packed)) {
+typedef struct TOOLCHAIN_ATTR_PACKED {
   u32 flags;    /**< Status flags */
 } msg_heartbeat_t;
 
 
 /** \} */
-
+TOOLCHAIN_PRAGMA_PACK_TAIL
 #endif /* LIBSBP_SYSTEM_MESSAGES_H */
