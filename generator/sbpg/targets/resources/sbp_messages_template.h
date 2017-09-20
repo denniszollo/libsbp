@@ -24,15 +24,7 @@
 #define LIBSBP_(((pkg_name|upper)))_MESSAGES_H
 
 #include "common.h"
-
-#if defined(TOOLCHAIN_GCC)
- #define TOOLCHAIN_ATTR_PACKED    __attribute__((packed))
-#elif defined(TOOLCHAIN_MSC)
- #pragma pack(1)
- #define TOOLCHAIN_ATTR_PACKED    /* Intentionally empty */
-#else
- #error "Neither GNUC or MSVC compiler detected. Unable to define system macros for Libsbp."
-#endif
+TOOLCHAIN_PRAGMA_PACK_HEAD
 ((*- for i in include *))
 #include "(((i)))"
 ((*- endfor *))
@@ -61,7 +53,5 @@ typedef struct TOOLCHAIN_ATTR_PACKED {
 
 ((* endfor *))
 /** \} */
-#if defined (TOOLCHAIN_MSC)
-   #pragma pack()
-#endif
+TOOLCHAIN_PRAGMA_PACK_TAIL
 #endif /* LIBSBP_(((pkg_name|upper)))_MESSAGES_H */
