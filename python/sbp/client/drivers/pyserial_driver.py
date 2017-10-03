@@ -11,6 +11,7 @@
 from .base_driver import BaseDriver
 import serial
 import serial.tools.list_ports
+import sys
 try:
     import termios
     SerialError = termios.error
@@ -44,6 +45,9 @@ class PySerialDriver(BaseDriver):
     def __init__(self, port, baud=115200, rtscts=False):
         import serial
         try:
+            
+            if sys.platform.starswith('win'):
+               handle.set_buffer_size(rx_size=8192)
             handle = serial.serial_for_url(port)
             handle.baudrate = baud
             handle.timeout = 1
