@@ -46,7 +46,7 @@ class PySerialDriver(BaseDriver):
         import serial
         try:
             
-            if sys.platform.starswith('win'):
+            if sys.platform.startswith('win'):
                handle.set_buffer_size(rx_size=8192)
             handle = serial.serial_for_url(port)
             handle.baudrate = baud
