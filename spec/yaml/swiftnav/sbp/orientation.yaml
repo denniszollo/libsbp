@@ -9,7 +9,12 @@
 # WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 
 package: swiftnav.sbp.orientation
-description: Orientation Messages
+description: |
+  Orientation messages describe the orientation of a vehicle with respect to the earth.
+  They can be produced from inertial and mult-antenna GNSS-only systems and represent 
+  the direction that a vehicle is pointing without considering motion of the vehicle.  
+  Orientation is sometimes refered to as attitude, and can be described with terms such
+  as "pitch", "roll", "yaw", "heading", "azimuth", and "tilt".
 stable: False
 public: True
 definitions:
@@ -55,7 +60,8 @@ definitions:
     desc: |
       This message reports the quaternion vector describing the vehicle body frame's orientation
       with respect to a local-level NED frame. The components of the vector should sum to a unit
-      vector assuming that the LSB of each component as a value of 2^-31. 
+      vector assuming that the LSB of each component as a value of 2^-31. It is produced only by
+      inertial versions of Swift products.
     fields:
           - tow:
               type: u32
@@ -112,7 +118,8 @@ definitions:
       This message reports the yaw, pitch, and roll angles of the vehicle body frame.
       The rotations should applied intrinsically in the order yaw, pitch, and roll 
       in order to rotate the from a frame aligned with the local-level NED frame 
-      to the vehicle body frame.
+      to the vehicle body frame.  The message is produced only by inertial versions 
+      of Swift products.
     fields:
           - tow:
               type: u32
@@ -164,6 +171,7 @@ definitions:
       By convention, the vehicle x-axis is expected to be aligned with the forward
       direction, while the vehicle y-axis is expected to be aligned with the right
       direction, and the vehicle z-axis should be aligned with the down direction.
+      The message is produced only by inertial versions of Swift product.
     fields:
           - tow:
               type: u32
