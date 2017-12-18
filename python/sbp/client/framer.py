@@ -123,7 +123,7 @@ class Framer(object):
             return None
         msg = SBP(msg_type, sender, msg_len, data, crc)
         try:
-            msg = self._dispatch(msg)
+            msg = self._dispatch(msg, verbose=self._verbose)
         except:
             pass
         return msg

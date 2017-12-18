@@ -61,7 +61,7 @@ class InvalidSBPMessageType(NotImplementedError):
   Base exception for messages with invalid message types.
   """
 
-def dispatch(msg, table=_SBP_TABLE):
+def dispatch(msg, table=_SBP_TABLE, verbose=False):
   """
   Dispatch an SBP message type based on its `msg_type` and parse its
   payload.
@@ -84,7 +84,8 @@ def dispatch(msg, table=_SBP_TABLE):
   except KeyError:
     warn = "No message found for msg_type id %d for msg %s." \
            % (msg.msg_type, msg)
-    warnings.warn(warn, RuntimeWarning)
+    if verbose:
+      warnings.warn(warn, RuntimeWarning)
     return msg
   except FieldError:
     warnings.warn("SBP payload deserialization error! 0x%x" % msg.msg_type,
