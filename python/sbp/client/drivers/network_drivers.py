@@ -74,7 +74,7 @@ class TCPDriver(BaseDriver):
             return data
         except socket.timeout:
             self._connect()
-        except socket.error, msg:
+        except (socket.error, msg):
             raise IOError
 
     def flush(self):
@@ -94,7 +94,7 @@ class TCPDriver(BaseDriver):
             self.handle.sendall(s)
         except socket.timeout:
             self._connect()
-        except socket.error, msg:
+        except (socket.error, msg):
             raise IOError
         finally:
             self._write_lock.release()

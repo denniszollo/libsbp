@@ -24,7 +24,7 @@ from . import observation as obs
 from . import piksi as piksi
 from . import settings as settings
 from . import system as sys
-from . import tracking as trac
+from . import tracking as tracking
 from . import ext_events as ext_events
 from . import user as user
 from . import imu as imu
@@ -36,26 +36,10 @@ from . import sbas as sbas
 
 import warnings
 
-_SBP_TABLE = dict(acq.msg_classes.items()
-                  + boot.msg_classes.items()
-                  + file_io.msg_classes.items()
-                  + flash.msg_classes.items()
-                  + log.msg_classes.items()
-                  + nav.msg_classes.items()
-                  + obs.msg_classes.items()
-                  + piksi.msg_classes.items()
-                  + settings.msg_classes.items()
-                  + sys.msg_classes.items()
-                  + trac.msg_classes.items()
-                  + user.msg_classes.items()
-                  + imu.msg_classes.items()
-                  + mag.msg_classes.items()
-                  + ext_events.msg_classes.items()
-                  + ndb.msg_classes.items()
-                  + vehicle.msg_classes.items()
-                  + orientation.msg_classes.items()
-                  + sbas.msg_classes.items()
-                  )
+classes = [acq, boot, file_io, flash, log, nav, obs, piksi, settings, sys, tracking, user, imu, mag, ext_events, ndb, vehicle, orientation, sbas]
+_SBP_TABLE = {}
+for item in classes:
+  _SBP_TABLE.update(item.msg_classes)
 
 class InvalidSBPMessageType(NotImplementedError):
   """

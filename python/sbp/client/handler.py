@@ -15,7 +15,7 @@ SBP message handling.
 import collections
 import threading
 import weakref
-from Queue import Queue
+from queue import Queue
 
 
 class Handler(object):
@@ -274,7 +274,7 @@ class Handler(object):
             self._broken = True
             self._queue.put(None, True, 1.0)
 
-        def next(self):
+        def __next__(self):
             if self._broken and self._queue.empty():
                 raise StopIteration
             m = self._queue.get(True)
