@@ -53,6 +53,7 @@ class ((( m.identifier )))(object):
                      ((*- for f in m.fields *))
                      ((( f | construct_py ))),
                      ((*- endfor *))))
+  _parser = _parser.compile()
   __slots__ = [((* for f in m.fields *))
                '((( f.identifier )))',
                ((*- endfor *))
