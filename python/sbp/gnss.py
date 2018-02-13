@@ -42,6 +42,10 @@ class GnssSignal(object):
   _parser = construct.Embedded(construct.Struct(
                      'sat' / construct.Int8ul,
                      'code' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'sat',
                'code',
@@ -89,6 +93,10 @@ Note: unlike GnssSignal, GPS satellites are encoded as
                      'sat' / construct.Int16ul,
                      'code' / construct.Int8ul,
                      'reserved' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'sat',
                'code',
@@ -134,6 +142,10 @@ transition.
   _parser = construct.Embedded(construct.Struct(
                      'tow' / construct.Int32ul,
                      'wn' / construct.Int16ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'tow',
                'wn',
@@ -177,6 +189,10 @@ transition.
   _parser = construct.Embedded(construct.Struct(
                      'tow' / construct.Int32ul,
                      'wn' / construct.Int16ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'tow',
                'wn',
@@ -226,6 +242,10 @@ from -500000 to 500000)
                      'tow' / construct.Int32ul,
                      'ns_residual' / construct.Int32sl,
                      'wn' / construct.Int16ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'tow',
                'ns_residual',
@@ -272,6 +292,10 @@ same sign as the pseudorange.
   _parser = construct.Embedded(construct.Struct(
                      'i' / construct.Int32sl,
                      'f' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'i',
                'f',

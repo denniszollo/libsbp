@@ -48,6 +48,10 @@ measured signal power.
                      'sid' / construct.Struct(GnssSignal._parser),
                      'fcn' / construct.Int8ul,
                      'cn0' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'sid',
                'fcn',
@@ -91,6 +95,10 @@ class TrackingChannelCorrelation(object):
   _parser = construct.Embedded(construct.Struct(
                      'I' / construct.Int32sl,
                      'Q' / construct.Int32sl,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'I',
                'Q',
@@ -134,6 +142,10 @@ class TrackingChannelStateDepA(object):
                      'state' / construct.Int8ul,
                      'prn' / construct.Int8ul,
                      'cn0' / construct.Float32l,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'state',
                'prn',
@@ -179,6 +191,10 @@ class TrackingChannelStateDepB(object):
                      'state' / construct.Int8ul,
                      'sid' / construct.Struct(GnssSignalDep._parser),
                      'cn0' / construct.Float32l,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'state',
                'sid',

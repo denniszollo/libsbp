@@ -233,7 +233,7 @@ class MsgTweet(SBP):
 
   """
   _parser = construct.Struct(
-                   'tweet'/ construct.String(140, paddir='left'),)
+                   'tweet'/ construct.String(140, encoding='utf8' ),)
   __slots__ = [
                'tweet',
               ]

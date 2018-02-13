@@ -44,6 +44,10 @@ The corrections are conform with typical RTCMv3 MT1059 and 1065.
   _parser = construct.Embedded(construct.Struct(
                      'code' / construct.Int8ul,
                      'value' / construct.Int16sl,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'code',
                'value',
@@ -97,6 +101,10 @@ Increased for every discontinuity in phase.
                      'widelane_integer_indicator' / construct.Int8ul,
                      'discontinuity_counter' / construct.Int8ul,
                      'bias' / construct.Int32sl,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'code',
                'integer_indicator',

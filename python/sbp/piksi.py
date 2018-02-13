@@ -64,6 +64,10 @@ be normalized.
                      'io_error_count' / construct.Int16ul,
                      'tx_buffer_level' / construct.Int8ul,
                      'rx_buffer_level' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'tx_throughput',
                'rx_throughput',
@@ -124,6 +128,10 @@ can cause momentary RTK solution outages.
                      'pmin' / construct.Int32sl,
                      'pmax' / construct.Int32sl,
                      'current' / construct.Int32sl,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'avg',
                'pmin',
@@ -179,6 +187,10 @@ communication latency in the system.
                      'lmin' / construct.Int32sl,
                      'lmax' / construct.Int32sl,
                      'current' / construct.Int32sl,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'avg',
                'lmin',
@@ -683,7 +695,7 @@ thread. The reported percentage values must be normalized.
 
   """
   _parser = construct.Struct(
-                   'name'/ construct.String(20, paddir='left'),
+                   'name'/ construct.String(20, encoding='utf8' ),
                    'cpu' / construct.Int16ul,
                    'stack_free' / construct.Int32ul,)
   __slots__ = [
@@ -1665,7 +1677,7 @@ in c.
                    'ipv6_mask_size' / construct.Int8ul,
                    'rx_bytes' / construct.Int32ul,
                    'tx_bytes' / construct.Int32ul,
-                   'interface_name'/ construct.String(16, paddir='left'),
+                   'interface_name'/ construct.String(16, encoding='utf8' ),
                    'flags' / construct.Int32ul,)
   __slots__ = [
                'ipv4_address',

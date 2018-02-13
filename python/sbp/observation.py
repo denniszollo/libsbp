@@ -45,6 +45,10 @@ counter (ith packet of n)
   _parser = construct.Embedded(construct.Struct(
                      't' / construct.Struct(GPSTime._parser),
                      'n_obs' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                't',
                'n_obs',
@@ -89,6 +93,10 @@ as positive for approaching satellites.
   _parser = construct.Embedded(construct.Struct(
                      'i' / construct.Int16sl,
                      'f' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'i',
                'f',
@@ -156,6 +164,10 @@ estimate for the signal is valid.
                      'lock' / construct.Int8ul,
                      'flags' / construct.Int8ul,
                      'sid' / construct.Struct(GnssSignal._parser),))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'P',
                'L',
@@ -221,6 +233,10 @@ GLO: 0 = valid, non-zero = invalid
                      'fit_interval' / construct.Int32ul,
                      'valid' / construct.Int8ul,
                      'health_bits' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'sid',
                'toe',
@@ -284,6 +300,10 @@ GLO: 0 = valid, non-zero = invalid
                      'fit_interval' / construct.Int32ul,
                      'valid' / construct.Int8ul,
                      'health_bits' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'sid',
                'toe',
@@ -335,6 +355,10 @@ counter (ith packet of n)
   _parser = construct.Embedded(construct.Struct(
                      't' / construct.Struct(GPSTimeDep._parser),
                      'n_obs' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                't',
                'n_obs',
@@ -380,6 +404,10 @@ the opposite sign as the pseudorange.
   _parser = construct.Embedded(construct.Struct(
                      'i' / construct.Int32sl,
                      'f' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'i',
                'f',
@@ -432,6 +460,10 @@ carrier phase ambiguity may have changed.
                      'cn0' / construct.Int8ul,
                      'lock' / construct.Int16ul,
                      'prn' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'P',
                'L',
@@ -492,6 +524,10 @@ carrier phase ambiguity may have changed.
                      'cn0' / construct.Int8ul,
                      'lock' / construct.Int16ul,
                      'sid' / construct.Struct(GnssSignalDep._parser),))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'P',
                'L',
@@ -553,6 +589,10 @@ carrier phase ambiguity may have changed.
                      'cn0' / construct.Int8ul,
                      'lock' / construct.Int16ul,
                      'sid' / construct.Struct(GnssSignalDep._parser),))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'P',
                'L',
@@ -625,6 +665,10 @@ Satellite health status for GLO:
                      'fit_interval' / construct.Int32ul,
                      'valid' / construct.Int8ul,
                      'health_bits' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'sid',
                'toa',
@@ -699,6 +743,10 @@ Satellite health status for GLO:
                      'fit_interval' / construct.Int32ul,
                      'valid' / construct.Int8ul,
                      'health_bits' / construct.Int8ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'sid',
                'toa',

@@ -75,6 +75,10 @@ The message is used to debug and measure the performance.
                      'cf_max' / construct.Int32sl,
                      'cf' / construct.Int32sl,
                      'cp' / construct.Int32ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'job_type',
                'status',
@@ -165,6 +169,10 @@ class AcqSvProfileDep(object):
                      'cf_max' / construct.Int32sl,
                      'cf' / construct.Int32sl,
                      'cp' / construct.Int32ul,))
+  try:
+    _parser = _parser.compile()
+  except NotImplementedError:
+    pass
   __slots__ = [
                'job_type',
                'status',

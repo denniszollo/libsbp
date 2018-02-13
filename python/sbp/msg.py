@@ -60,7 +60,7 @@ def crc16(s, crc=0):
 
   """
   for ch in s:
-    crc = ((crc<<8)&0xFFFF) ^ crc16_tab[ ((crc>>8)&0xFF) ^ (ord(ch)&0xFF) ]
+    crc = ((crc<<8)&0xFFFF) ^ crc16_tab[ ((crc>>8)&0xFF) ^ (ch&0xFF) ]
     crc &= 0xFFFF
   return crc
 
