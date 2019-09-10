@@ -87,8 +87,8 @@ typedef void (*sbp_frame_callback_t)(u16 sender_id, u16 msg_type,
  */
 enum sbp_cb_type {
   SBP_TYPE_CALLBACK = 0,
-  SBP_FRAME_CALLBACK,
-  SBP_CALLBACK_TYPE_COUNT
+  SBP_FRAME_CALLBACK = 1,
+  SBP_CALLBACK_TYPE_COUNT = 2,
 };
 
 #define SBP_CALLBACK_FLAG(cb_type) (1u << (cb_type))
