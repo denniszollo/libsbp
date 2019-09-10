@@ -88,14 +88,21 @@ u16 last_frame_sender_id;
 u16 last_frame_msg_type;
 u8 last_frame_payload_len;
 u16 last_frame_len;
-void* last_frame_context;
 u8 last_frame[256 + 8];
+void* last_frame_context;
 
 void logging_reset(void)
 {
   n_callbacks_logged = 0;
   n_frame_callbacks_logged = 0;
   last_context = 0;
+  last_sender_id = 0;
+  last_len = 0;
+  last_frame_context = 0;
+  last_frame_sender_id = 0;
+  last_frame_len = 0;
+  last_frame_sender_id = 0;
+  last_frame_msg_type = 0;
   memset(last_msg, 0, sizeof(last_msg));
   memset(last_frame, 0, sizeof(last_frame));
 }
